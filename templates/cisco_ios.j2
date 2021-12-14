@@ -3,6 +3,8 @@ hostname {{ hostname }}
 !
 vrf definition Mgmt-vrf
 !
+ip domain-name {{ config_context['domain-name'] }}
+!
 address-family ipv4
 exit-address-family
 !
