@@ -1,0 +1,22 @@
+!
+hostname {{ hostname }}
+!
+vrf definition Mgmt-vrf
+!
+ip domain-name {{ config_context['domain-name'] }}
+!
+address-family ipv4
+exit-address-family
+!
+address-family ipv6
+exit-address-family
+!
+{% for server in config_context['ntp'] %}
+{% if server['prefer'] %}
+ntp server {{ server['ip'] }} prefer
+{% else %}
+ntp server {{ server['ip'] }}
+{% endif %}
+{% endfor %}
+!
+
